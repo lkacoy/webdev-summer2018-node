@@ -5,6 +5,8 @@ module.exports = function (app) {
   app.get('/api/profile', profile);
   app.post('/api/logout', logout);
   app.post('/api/login', login);
+  app.put('/api/profile', updateUser);
+  app.delete('/api/profile', deleteUser);
 
   var userModel = require('../models/user/user.model.server');
 
@@ -57,5 +59,17 @@ module.exports = function (app) {
       .then(function (users) {
         res.send(users);
       })
+  }
+
+  function updateUser(req, res) {
+      userModel.updateUser(req.session['currentUser'])
+          .then(function (user) {
+          res.send(user);
+      });
+  }
+
+  function deleteUser(req, res) {
+      userModel.deleteUser(req.session['currentUser']);
+      res.send('user deleted');
   }
 }

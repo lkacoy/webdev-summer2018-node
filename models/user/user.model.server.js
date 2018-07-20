@@ -23,12 +23,28 @@ function findAllUsers() {
   return userModel.find();
 }
 
+function updateUser(user) {
+  var query = {'username': user.username};
+  return userModel.findOneAndUpdate(query, {$set: {username: user.username,
+          password: user.password,
+          firstName: user.firstName,
+          lastName: user.lastName,
+          email: user.email,
+          sections: user.sections}})
+}
+
+function deleteUser(user) {
+  var query = {'username'}
+}
+
 var api = {
   createUser: createUser,
   findAllUsers: findAllUsers,
   findUserById: findUserById,
   findUserByCredentials: findUserByCredentials,
-  findUserByName: findUserByName
+  findUserByName: findUserByName,
+  updateUser: updateUser,
+  deleteUser: deleteUser
 };
 
 module.exports = api;
