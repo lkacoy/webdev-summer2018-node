@@ -40,11 +40,9 @@ module.exports = function (app) {
     userModel.findUserByName(user.username)
         .then(function (user) {
           console.log(user);
-          if (user._id != null) {
-            console.log("getting here");
+          if (user != null && user._id != null) {
             res.send({ error : 'User already exists' })
           } else {
-              console.log("creating user");
               userModel.createUser(user)
                   .then(function (user) {
                       req.session['currentUser'] = user;
