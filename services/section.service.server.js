@@ -3,6 +3,7 @@ module.exports = function (app) {
   app.post('/api/course/:courseId/section', createSection);
   app.get('/api/course/:courseId/section', findSectionsForCourse);
   app.post('/api/section/:sectionId/enrollment', enrollStudentInSection);
+  app.post('/api/student/:studentId/section/:sectionId', enrollOtherStudentInSection);
   app.get('/api/student/section', findSectionsForStudent);
 
   var sectionModel = require('../models/section/section.model.server');
@@ -36,6 +37,26 @@ module.exports = function (app) {
       .then(function (enrollment) {
         res.json(enrollment);
       })
+  }
+
+  function enrollOtherStudentInSection(req, res) {
+      var sectionId = req.params.sectionId;
+      var student = req.params.studentId;
+      var studentId = student._id;
+      var enrollment = {
+          student: studentId,
+          section: sectionId
+      };
+
+      sectionModel
+          .decrementSectionSeats(sectionId)
+          .then(function () {
+              return enrollmentModel
+                  .enrollStudentInSection(enrollment)
+          })
+          .then(function (enrollment) {
+              res.json(enrollment);
+          })
   }
 
   function findSectionsForCourse(req, res) {
