@@ -27,8 +27,12 @@ function incrementSectionSeats(sectionId) {
 }
 
 function findSectionById(sectionId) {
-  console.log(sectionId);
   return sectionModel.findById(sectionId);
+}
+
+function updateSectionById(section, sectionId) {
+  var query = {"_id": sectionId};
+  return sectionModel.findOneAndUpdate(query, section, {new: true});
 }
 
 module.exports = {
@@ -36,5 +40,6 @@ module.exports = {
   findSectionsForCourse: findSectionsForCourse,
   decrementSectionSeats: decrementSectionSeats,
   incrementSectionSeats: incrementSectionSeats,
-  findSectionById: findSectionById
+  findSectionById: findSectionById,
+  updateSectionById: updateSectionById
 };
