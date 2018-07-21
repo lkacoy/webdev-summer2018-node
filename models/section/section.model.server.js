@@ -35,11 +35,16 @@ function updateSectionById(section, sectionId) {
   return sectionModel.findOneAndUpdate(query, section, {new: true});
 }
 
+function deleteSectionById(sectionId) {
+  return sectionModel.deleteOne({ _id: sectionId });
+}
+
 module.exports = {
   createSection: createSection,
   findSectionsForCourse: findSectionsForCourse,
   decrementSectionSeats: decrementSectionSeats,
   incrementSectionSeats: incrementSectionSeats,
   findSectionById: findSectionById,
-  updateSectionById: updateSectionById
+  updateSectionById: updateSectionById,
+  deleteSectionById: deleteSectionById
 };
