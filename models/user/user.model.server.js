@@ -34,7 +34,7 @@ function updateUser(user) {
 }
 
 function deleteUser(user) {
-  var query = {'username'}
+  var query = {'username': user.username};
 }
 
 var api = {

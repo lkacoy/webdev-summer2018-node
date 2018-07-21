@@ -26,9 +26,15 @@ function incrementSectionSeats(sectionId) {
   });
 }
 
+function findSectionById(sectionId) {
+  console.log(sectionId);
+  return sectionModel.findById(sectionId);
+}
+
 module.exports = {
   createSection: createSection,
   findSectionsForCourse: findSectionsForCourse,
   decrementSectionSeats: decrementSectionSeats,
-  incrementSectionSeats: incrementSectionSeats
+  incrementSectionSeats: incrementSectionSeats,
+  findSectionById: findSectionById
 };
