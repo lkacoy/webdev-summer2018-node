@@ -14,6 +14,12 @@ module.exports = function (app) {
     var credentials = req.body;
     userModel
       .findUserByCredentials(credentials)
+       .then(function (user) {
+            console.log(user);
+            if (user == null) {
+                res.json({error:'Unable to login'});
+            }
+        })
       .then(function(user) {
         req.session['currentUser'] = user;
         res.json(user);
