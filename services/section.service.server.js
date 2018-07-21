@@ -1,13 +1,18 @@
 module.exports = function (app) {
 
+  //section apis
   app.post('/api/course/:courseId/section', createSection);
   app.get('/api/course/:courseId/section', findSectionsForCourse);
-  app.post('/api/section/:sectionId/enrollment', enrollStudentInSection);
-  app.post('/api/student/:studentId/section/:sectionId', enrollOtherStudentInSection);
-  app.get('/api/student/section', findSectionsForStudent);
   app.get('/api/section/:sectionId', findSectionById);
   app.put('/api/section/:sectionId', updateSectionById);
   app.delete('/api/section/:sectionId', deleteSectionById);
+
+  //enrollment apis
+  app.post('/api/section/:sectionId/enrollment', enrollStudentInSection);
+  app.post('/api/student/:studentId/section/:sectionId', enrollOtherStudentInSection);
+  app.get('/api/student/section', findSectionsForStudent);
+  app.get('/api/student/:studentId/section', findSectionsByStudentId);
+  app.delete('/api/student/:studentId/section/:sectionId', unenrollStudent);
 
   var sectionModel = require('../models/section/section.model.server');
   var enrollmentModel = require('../models/enrollment/enrollment.model.server');
@@ -103,5 +108,25 @@ module.exports = function (app) {
         .then(function (section) {
           res.json(section);
         });
+  }
+
+  function findSectionsByStudentId(req, res) {
+    var studentId = req.params['studentId'];
+    enrollmentModel
+          .findSectionsForStudent(studentId)
+          .then(function(enrollments) {
+              res.json(enrollments);
+          });
+  }
+
+  function unenrollStudent(req, res) {
+    var studentId = req.params['studentId'];
+    var sectionId = req.params['sectionId'];
+    enrollmentModel
+        .unenrollStudent(studentId, sectionId)
+        .then(function (enrollment) {
+          res.json(enrollment);
+        });
+
   }
 };

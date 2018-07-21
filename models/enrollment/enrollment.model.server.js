@@ -10,13 +10,19 @@ function enrollStudentInSection(enrollment) {
 }
 
 function findSectionsForStudent(studentId) {
+  console.log("STUDENTID: " + studentId);
   return enrollmentModel
     .find({student: studentId})
     .populate('section')
     .exec();
 }
 
+function unenrollStudent(studentId, sectionId) {
+  return enrollmentModel.deleteOne({student: studentId, section: sectionId});
+}
+
 module.exports = {
   enrollStudentInSection: enrollStudentInSection,
-  findSectionsForStudent: findSectionsForStudent
+  findSectionsForStudent: findSectionsForStudent,
+  unenrollStudent: unenrollStudent
 };
