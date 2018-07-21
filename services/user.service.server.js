@@ -15,15 +15,13 @@ module.exports = function (app) {
     userModel
       .findUserByCredentials(credentials)
        .then(function (user) {
-            console.log(user);
             if (user == null) {
                 res.json({error:'Unable to login'});
+            } else {
+                req.session['currentUser'] = user;
+                res.json(user);
             }
         })
-      .then(function(user) {
-        req.session['currentUser'] = user;
-        res.json(user);
-      })
   }
 
   function logout(req, res) {
