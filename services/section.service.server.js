@@ -113,7 +113,7 @@ module.exports = function (app) {
   function findSectionsByStudentId(req, res) {
     var studentId = req.params['studentId'];
     enrollmentModel
-          .findSectionsForStudent(studentId)
+          .findEnrolledSectionsByStudentId(studentId)
           .then(function(enrollments) {
               res.json(enrollments);
           });
