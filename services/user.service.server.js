@@ -66,8 +66,9 @@ module.exports = function (app) {
   }
 
   function updateUser(req, res) {
-      userModel.updateUser(req.session['currentUser'])
+      userModel.updateUser(req.session['currentUser'], req.body)
           .then(function (user) {
+          req.session['currentUser'] = user;
           res.send(user);
       });
   }

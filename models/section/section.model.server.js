@@ -31,8 +31,8 @@ function findSectionById(sectionId) {
 }
 
 function updateSectionById(section, sectionId) {
-  var query = {"_id": sectionId};
-  return sectionModel.findOneAndUpdate(query, section, {new: true});
+    var query = {"_id": sectionId};
+    return sectionModel.findOneAndUpdate(query, section, {new: true});
 }
 
 function deleteSectionById(sectionId) {

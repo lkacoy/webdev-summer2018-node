@@ -2,7 +2,8 @@ var mongoose = require('mongoose');
 var enrollmentSchema = require('./enrollment.schema.server');
 var enrollmentModel = mongoose.model(
   'EnrollmentModel',
-  enrollmentSchema
+  enrollmentSchema,
+    'enrollment'
 );
 
 function enrollStudentInSection(enrollment) {
