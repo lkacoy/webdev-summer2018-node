@@ -22,10 +22,11 @@ function findAllUsers() {
   return userModel.find();
 }
 
-function updateUser(username, user) {
-    console.log(user);
-  var query = {'username': username};
-  return userModel.findOneAndUpdate(query, user, {new: true})
+function updateUser(currentUser, newUser) {
+    console.log(newUser);
+    console.log(currentUser);
+  var query = {'username': currentUser.username, "password": currentUser.password};
+  return userModel.findOneAndUpdate(query, newUser)
 }
 
 function deleteUser(user) {
