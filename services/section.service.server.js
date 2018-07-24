@@ -79,6 +79,7 @@ module.exports = function (app) {
 
   function createSection(req, res) {
     var section = req.body;
+    console.log(section);
     sectionModel
       .createSection(section)
       .then(function (section) {
