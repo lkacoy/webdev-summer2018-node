@@ -21,8 +21,24 @@ function submitQuiz(submission, quizId, username) {
   });
 }
 
+function findQuizSubmissionsByStudent(quizId, student) {
+  return submissionModel.find({
+      quizId: quizId,
+      username: student
+  })
+}
+
+function findSubmissionById(studentId, submissionId) {
+  return submissionModel.find({
+      username: studentId,
+      _id: submissionId
+  });
+}
+
 module.exports = {
   submitQuiz: submitQuiz,
   findSubmissionsForQuiz: findSubmissionsForQuiz,
-  findSubmissionsForUser: findSubmissionsForUser
+  findSubmissionsForUser: findSubmissionsForUser,
+  findSubmissionById: findSubmissionById,
+  findQuizSubmissionsByStudent: findQuizSubmissionsByStudent
 };
