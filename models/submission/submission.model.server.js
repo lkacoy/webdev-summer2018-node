@@ -35,10 +35,18 @@ function findSubmissionById(studentId, submissionId) {
   });
 }
 
+function findSubmission( submissionId, quizId) {
+    return submissionModel.findOne({
+        _id: submissionId,
+        quizId: quizId
+    })
+}
+
 module.exports = {
   submitQuiz: submitQuiz,
   findSubmissionsForQuiz: findSubmissionsForQuiz,
   findSubmissionsForUser: findSubmissionsForUser,
   findSubmissionById: findSubmissionById,
-  findQuizSubmissionsByStudent: findQuizSubmissionsByStudent
+  findQuizSubmissionsByStudent: findQuizSubmissionsByStudent,
+  findSubmission: findSubmission
 };
