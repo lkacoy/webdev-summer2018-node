@@ -12,7 +12,6 @@ module.exports = function (app) {
         var studentId = req.params['studentId'];
         var submission = req.body;
 
-
     }
 
     function getSubmissionById(req, res) {

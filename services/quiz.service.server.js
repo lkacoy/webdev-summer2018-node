@@ -21,8 +21,9 @@ module.exports = function (app) {
   function submitQuiz(req, res) {
     var submission = req.body;
     var quizId = req.params.quizId;
+    var currentUser = req.session.currentUser.username;
     submissionModel
-      .submitQuiz(submission, quizId, 'alice')
+      .submitQuiz(submission, quizId, currentUser)
       .then(function (submission) {
         res.json(submission);
       })

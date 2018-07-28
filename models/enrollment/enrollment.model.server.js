@@ -11,7 +11,6 @@ function enrollStudentInSection(enrollment) {
 }
 
 function findSectionsForStudent(studentId) {
-  console.log("STUDENTID: " + studentId);
   return enrollmentModel
     .find({student: studentId})
     .populate('section')
