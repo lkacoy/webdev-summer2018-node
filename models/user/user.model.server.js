@@ -31,6 +31,7 @@ function updateUser(currentUser, newUser) {
 
 function deleteUser(user) {
   var query = {'username': user.username};
+  return userModel.findOneAndRemove(query);
 }
 
 var api = {
